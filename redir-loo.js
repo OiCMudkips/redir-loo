@@ -1,8 +1,8 @@
 // Dependencies
-var express = require('express');
-var session = require('express-session');
 var bodyParser = require('body-parser');
 var CASAuthentication = require('cas-authentication');
+var express = require('express');
+var session = require('express-session');
 
 // Config
 var config = require('./config/config.json');
