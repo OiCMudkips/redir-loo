@@ -8,13 +8,19 @@
 </head>
 <body>
     <div id="top-header">
-    <menu id="top-header-content" role="menubar" type="toolbar">
+    <menu class="header-content" role="menubar" type="toolbar">
         <li class="left">
             <a href="/">Home</a>
         </li>
+        {if user}
+        <li class="right">
+            <a href="/logout">Logout</a>
+        </li>
+        {else}
         <li class="right">
             <a href="/login">Login</a>
         </li>
+        {/if}
     </menu>
     </div>
     
@@ -34,7 +40,7 @@
     <a href="/login">Sign in with your UWaterloo credentials.</a>
     <p>redir-loo only stores your email ID in order to keep track of your links.</p>
     
-    <menu type="toolbar">
+    <menu class="header-content" type="toolbar">
         <li class="right">
             <a href="/author">About the Author</a>
         </li>

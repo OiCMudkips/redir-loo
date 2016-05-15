@@ -27,7 +27,7 @@ menu {
     padding-top:50px;
 }
 @media(max-width:700px) {
-    #top-header-content {
+    .header-content {
         width:100%;
         margin:auto;
     }
@@ -37,7 +37,7 @@ menu {
     }
 }
 @media(min-width:700px) {
-    #top-header-content {
+    .header-content {
         width:700px;
         margin:auto;
     }
@@ -47,7 +47,7 @@ menu {
     }
 }
 @media(min-width:1300px) {
-    #top-header-content {
+    .header-content {
         width:1000px;
         margin:auto;
     }
@@ -57,7 +57,7 @@ menu {
     }
 }
 @media(min-width:1700px) {
-    #top-header-content {
+    .header-content {
         width:1300px;
         margin:auto;
     }

@@ -24,6 +24,10 @@ app.use(express.static('public'));
 app.use(bodyParser.json({ strict: true, type: 'application/json' }));
 
 // Route GET requests as appropriate
+app.get('/', function(request, response) {
+    response.render('index.whisker', { user: request.session[casService.session_name] });
+})
+
 app.get('/login', casService.bounce, function(request, response) {
     response.redirect('/my-links');
 });
@@ -46,6 +50,4 @@ app.post('/create-link', casService.block, function(request, response) {
 });
 
 // Start the server
-app.listen(4004, function() {
-    console.log('I am now listening on port 4004!');
-});
+app.listen(4004);

@@ -8,19 +8,25 @@
 </head>
 <body>
     <div id="top-header">
-    <menu id="top-header-content" role="menubar" type="toolbar">
+    <menu class="header-content" role="menubar" type="toolbar">
         <li class="left">
             <a href="/">Home</a>
         </li>
+        {if user}
+        <li class="right">
+            <a href="/logout">Logout</a>
+        </li>
+        {else}
         <li class="right">
             <a href="/login">Login</a>
         </li>
+        {/if}
     </menu>
     
     <div id="content">
     <h1>{user}</h1>
     
-    <menu type="toolbar">
+    <menu class="header-content" role="menubar" type="toolbar">
         <li class="right">
             <a href="/author">About the Author</a>
         </li>
