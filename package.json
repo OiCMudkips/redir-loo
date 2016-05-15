@@ -21,6 +21,6 @@
     "cas-authentication": "0.0.8",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
-    "mustache": "^2.2.1"
+    "whiskers": "^0.3.3"
   }
 }

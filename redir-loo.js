@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var CASAuthentication = require('cas-authentication');
 var express = require('express');
 var session = require('express-session');
+var whiskers = require('whiskers');
 
 // Config
 var config = require('./config/config.json');
@@ -13,6 +14,8 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }));
+app.engine('.whisker', whiskers.__express);
+app.set('views', __dirname + '/templates');
 
 // Expose static resources
 app.use(express.static('public'));
@@ -26,7 +29,7 @@ app.get('/login', casService.bounce, function(request, response) {
 });
 
 app.get('/user', casService.bounce, function(request, response) {
-    response.json(request.session[casService.session_name]);
+    response.render('user.whisker', { user: request.session[casService.session_name] });
 });
 
 app.get('/logout', casService.logout, function(request, response) {
