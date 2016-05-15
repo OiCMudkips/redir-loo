@@ -18,7 +18,6 @@ app.use(session({
 app.use(express.static('public'));
 
 // Configure body parser for POST requests
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({ strict: true, type: 'application/json' }));
 
 // Route GET requests as appropriate
