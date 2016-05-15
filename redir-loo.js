@@ -25,10 +25,10 @@ app.use(bodyParser.json({ strict: true, type: 'application/json' }));
 
 // Route GET requests as appropriate
 app.get('/login', casService.bounce, function(request, response) {
-    response.redirect('/user');
+    response.redirect('/my-links');
 });
 
-app.get('/user', casService.bounce, function(request, response) {
+app.get('/my-links', casService.bounce, function(request, response) {
     response.render('user.whisker', { user: request.session[casService.session_name] });
 });
 
