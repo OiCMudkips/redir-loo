@@ -1,0 +1,25 @@
+{
+  "name": "redir-loo",
+  "version": "0.0.1",
+  "description": "Website which allows members of the UWaterloo community to protect links to their content",
+  "main": "redir-loo.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OiCMudkips/redir-loo.git"
+  },
+  "author": "Victor Zhou",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/OiCMudkips/redir-loo/issues"
+  },
+  "homepage": "https://github.com/OiCMudkips/redir-loo#readme",
+  "dependencies": {
+    "cas-authentication": "0.0.8",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "mustache": "^2.2.1"
+  }
+}

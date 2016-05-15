@@ -1,0 +1,10 @@
+{
+  // The options used to connect to the CAS server. See https://github.com/kylepixel/cas-authentication/blob/master/README.md 
+  "casOptions": {
+    "cas_url": "https://cas-server.com/cas",
+    "service_url": "http://your-web-app.com"
+  },
+  
+  // The secret to use to store the session
+  "expressSessionSecret": "fa597ef692615d2cb77de745ae9ae06663ffc9d87c694ec2a86638f3b96b4125"
+}
