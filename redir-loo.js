@@ -1,6 +1,7 @@
 // Dependencies
 var express = require('express');
 var session = require('express-session');
+var bodyParser = require('body-parser');
 var CASAuthentication = require('cas-authentication');
 
 // Config
@@ -16,7 +17,11 @@ app.use(session({
 // Expose static resources
 app.use(express.static('public'));
 
-// Route requests as appropriate
+// Configure body parser for POST requests
+app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.json({ strict: true, type: 'application/json' }));
+
+// Route GET requests as appropriate
 app.get('/login', casService.bounce, function(request, response) {
     response.redirect('/user');
 });
@@ -27,6 +32,15 @@ app.get('/user', casService.bounce, function(request, response) {
 
 app.get('/logout', casService.logout, function(request, response) {
     response.send('Logged out!');
+});
+
+// Route POST requests as appropriate
+app.post('/create-link', casService.block, function(request, response) {
+    var destinationUrl = request.body.destinationUrl;
+    console.log('Destination URL:' + destinationUrl);
+    // TODO: send back something to make a popup saying it worked
+    response.send('Thanks!');
+    response.end();
 });
 
 // Start the server

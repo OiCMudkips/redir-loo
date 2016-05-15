@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/OiCMudkips/redir-loo#readme",
   "dependencies": {
+    "body-parser": "^1.15.1",
     "cas-authentication": "0.0.8",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
