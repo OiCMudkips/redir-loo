@@ -19,7 +19,7 @@ app.use(session({
 app.use(express.static('public'));
 
 app.get('/login', casService.bounce, function(request, response) {
-    response.send('Successfully authenticated!');
+    response.redirect('/user');
 });
 
 app.get('/user', casService.bounce, function(request, response) {
