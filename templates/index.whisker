@@ -39,7 +39,9 @@
     
     <a href="/login">Sign in with your UWaterloo credentials.</a>
     <p>redir-loo only stores your email ID in order to keep track of your links.</p>
+    </div>
     
+    <div id="bottom-header">
     <menu class="header-content" type="toolbar">
         <li class="right">
             <a href="/author">About the Author</a>

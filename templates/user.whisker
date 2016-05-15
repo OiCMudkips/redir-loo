@@ -22,10 +22,13 @@
         </li>
         {/if}
     </menu>
+    </div>
     
     <div id="content">
     <h1>{user}</h1>
+    </div>
     
+    <div id="bottom-header">
     <menu class="header-content" role="menubar" type="toolbar">
         <li class="right">
             <a href="/author">About the Author</a>
