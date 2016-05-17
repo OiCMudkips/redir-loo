@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>redir-loo | Home</title>
+    <title>redir-loo | My Links</title>
     <meta charset="UTF-8"/>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&subset=latin,latin-ext" rel="stylesheet" type="text/css"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" rel="stylesheet" type="text/css"/>
@@ -25,8 +25,20 @@
     </div>
     
     <div id="content">
-    <h1>{user}</h1>
+    <h1>{user}'s Links</h1>
+    {if rows.length}
+    <table>
+        <tr><th>Destination</th><th>Shortened Link</th></tr>
+        {for row in rows}
+        <tr>
+            <td>{row.url}</td>
+            <td>http://placeholder.com/{row.shortened}</td>
+        </tr>
+        {/for}
     </div>
+    {else}
+    <p>We didn't find any links for you. Add one now!</p>
+    {/if}
     
     <div id="bottom-header">
     <menu class="header-content" role="menubar" type="toolbar">

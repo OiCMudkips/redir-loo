@@ -5,6 +5,13 @@
     "service_url": "http://your-web-app.com"
   },
   
+  // The options used to connect to the MariaDB server. See https://github.com/mscdex/node-mariasql/blob/master/README.md
+  "sqlOptions": {
+    "host": "localhost",
+    "user": "app",
+    "password": ""
+  },
+  
   // The secret to use to store the session
   "expressSessionSecret": ""
 }
