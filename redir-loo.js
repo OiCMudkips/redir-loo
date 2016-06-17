@@ -37,18 +37,25 @@ app.get('/', function(request, response) {
 })
 
 app.get('/login', casService.bounce, function(request, response) {
-    client.query( preparedUserInsert({ username: request.session[casService.session_name] }),
+    client.query( preparedUserLookup ({ username: request.session[casService.session_name] }),
         function(error, rows) {
-            if (error && error.code === 1062) {
-                console.log('Existing user ' + request.session[casService.session_name] + ' logged in.');
-                response.redirect('/my-links');
-            }
-            else if (error) {
+            if (error) {
                 console.log(error);
+            }
+            else if (rows.length) {
+                    console.log('Existing user ' + request.session[casService.session_name] + ' logged in.');
+                    response.redirect('/my-links');
             }
             else {
                 console.log('New user ' + request.session[casService.session_name] + ' logged in.');
-                response.redirect('/my-links');
+                client.query( preparedUserInsert({ username: request.session[casService.session_name] }),
+                    function (error, rows) {
+                        if (error) {
+                            console.log(error);
+                        }
+                        response.redirect('/my-links');
+                    }
+                );
             }
         }
     );
