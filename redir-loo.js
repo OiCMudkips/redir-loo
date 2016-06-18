@@ -23,7 +23,7 @@ var client = new Client(config.sqlOptions);
 var preparedUserLookup = client.prepare('SELECT * FROM USERS WHERE USERNAME=:username');
 var preparedUserInsert = client.prepare('INSERT INTO USERS (username) VALUES (:username)');
 var preparedUserDelete = client.prepare('DELETE FROM USERS WHERE USERNAME=:username LIMIT 1');
-var preparedLinkLookup = client.prepare('SELECT url, shortened FROM links WHERE id IN (SELECT b.linkid FROM users a, linkowners b WHERE a.username=:username AND a.userid=b.userid)');
+var preparedLinkLookup = client.prepare('SELECT url, shortened FROM users a, links b WHERE a.username=:username AND a.userid=b.owner');
 
 // Expose static resources
 app.use(express.static('public'));
