@@ -25,20 +25,24 @@
     </div>
     
     <div id="content">
-    <img src="" alt="redir-loo" />
-    
     <h1>redir-loo</h1>
-    <p class="subtitle">Share your links with members of the UWaterloo community.</p>
-    <p>redir-loo is a URL shortening service that allows you to share links to with a UWaterloo community. People who click your link will need to log in with their <a href="https://watiam.uwaterloo.ca/">WatIAM</a> credentials before being able to access your link.</p>
+
+    <h2 class="subtitle">Share your links with members of the UWaterloo community.</h2>
+    <p>
+        redir-loo is a URL shortening service that allows you to share links to with a UWaterloo community.
+        People who click your link will need to log in with their <a href="https://watiam.uwaterloo.ca/">WatIAM</a> credentials before being able to access your link.
+    </p>
     
     <h2>How do I use redir-loo?</h2>
-    <p><a href="/login">Log into redir-loo</a> with your WatIAM account, and paste in a URL to share. That's it!</p>
+    <p>
+        <a href="/login">Log into redir-loo</a> with your WatIAM account, and paste in a URL to share. That's it!
+    </p>
     
     <h2>Couldn't someone from the UWaterloo community just share the link after logging in?</h2>
-    <p>Yes. You'll still need to be careful to make sure that you trust whoever you share redir-loo links with. You can specify users that are authorized to access redir-loo links to enforce this trust.</p>
-    
-    <a href="/login">Sign in with your UWaterloo credentials.</a>
-    <p>redir-loo only stores your email ID in order to keep track of your links.</p>
+    <p>
+        Yes. You'll still need to be careful to make sure that you trust whoever you share redir-loo links with.
+        You can specify users that are authorized to access redir-loo links to enforce this trust.
+    </p>
     </div>
     
     <div id="bottom-header">
