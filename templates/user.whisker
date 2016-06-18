@@ -27,6 +27,7 @@
     <div id="content">
     <h1>{user}'s Links</h1>
     {if rows.length}
+    <button class="open-popup">Add Link</button>
     <table>
         <tr><th>Destination</th><th>Shortened Link</th></tr>
         {for row in rows}
@@ -35,9 +36,11 @@
             <td>http://placeholder.com/{row.shortened}</td>
         </tr>
         {/for}
-    </div>
+    </table>
+    <button class="open-popup">Add Link</button>
     {else}
     <p>We didn't find any links for you. Add one now!</p>
+    <button class="open-popup">Add Link</button>
     {/if}
     
     <div id="bottom-header">
@@ -53,4 +56,25 @@
         </li>
     </menu>
     </div>
+
+    <div id="add-link-overlay" style="display: none">
+        <button id="close-overlay">X</button>
+        <input id="url" type="url" autocomplete="url">
+        <button id="add-link">Add</button>
+    </div>
+    <script>
+        var openPopup = function() {
+            document.getElementById("add-link-overlay").style.display = "block";
+        };
+
+        var closePopup = function() {
+            document.getElementById("add-link-overlay").style.display = "none";
+        };
+
+        var overlayOpeners = document.getElementsByClassName("open-popup");
+        Array.prototype.forEach.call(overlayOpeners, function(current) {
+            current.addEventListener("click", openPopup);
+        });
+        document.getElementById("close-overlay").addEventListener("click", closePopup);
+    </script>
 </body>
