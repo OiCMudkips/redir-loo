@@ -51,10 +51,19 @@ app.get('/login', casService.bounce, function(request, response) {
         function(error, rows) {
             if (error) {
                 console.log(error);
+                response.render('error.whisker', {
+                    partials: {
+                        head: 'head.whisker',
+                        header: 'header.whisker',
+                        footer: 'footer.whisker'
+                    },
+                    user: request.session[casService.session_name],
+                    title: 'Error'
+                });
             }
             else if (rows.length) {
-                    console.log('Existing user ' + request.session[casService.session_name] + ' logged in.');
-                    response.redirect('/my-links');
+                console.log('Existing user ' + request.session[casService.session_name] + ' logged in.');
+                response.redirect('/my-links');
             }
             else {
                 console.log('New user ' + request.session[casService.session_name] + ' logged in.');
@@ -62,6 +71,15 @@ app.get('/login', casService.bounce, function(request, response) {
                     function (error, rows) {
                         if (error) {
                             console.log(error);
+                            response.render('error.whisker', {
+                                partials: {
+                                    head: 'head.whisker',
+                                    header: 'header.whisker',
+                                    footer: 'footer.whisker'
+                                },
+                                user: request.session[casService.session_name],
+                                title: 'Error'
+                            });
                         }
                         response.redirect('/my-links');
                     }
@@ -76,6 +94,15 @@ app.get('/my-links', casService.bounce, function(request, response) {
         function(error, rows) {
             if (error) {
                 console.log(error);
+                response.render('error.whisker', {
+                    partials: {
+                        head: 'head.whisker',
+                        header: 'header.whisker',
+                        footer: 'footer.whisker'
+                    },
+                    user: request.session[casService.session_name],
+                    title: 'Error'
+                });
             }
             else {
                 response.render('user.whisker', {
@@ -102,6 +129,15 @@ app.post('/create-link', casService.block, jsonParser, function(request, respons
         function(error, rows) {
             if (error) {
                 console.log(error);
+                response.render('error.whisker', {
+                    partials: {
+                        head: 'head.whisker',
+                        header: 'header.whisker',
+                        footer: 'footer.whisker'
+                    },
+                    user: request.session[casService.session_name],
+                    title: 'Error'
+                });
             }
             else {
                 response.send('Thanks! Shortened ID: ' + generatedId);
