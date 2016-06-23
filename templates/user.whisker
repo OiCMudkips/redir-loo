@@ -18,8 +18,8 @@
         <tr><th>Destination</th><th>Shortened Link</th></tr>
         {for row in rows}
         <tr>
-            <td>{row.url}</td>
-            <td>http://placeholder.com/{row.shortened}</td>
+            <td><a rel="nofollow" href="{row.url}">{row.url}</a></td>
+            <td><a href="http://placeholder.com/{row.shortened}">http://placeholder.com/{row.shortened}</a></td>
         </tr>
         {/for}
     </table>
