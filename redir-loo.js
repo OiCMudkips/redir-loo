@@ -95,7 +95,6 @@ app.get('/my-links', casService.bounce, function(request, response) {
 
 app.get('/logout', casService.logout);
 
-//'INSERT INTO links (url, shortened, owner) SELECT :link, :shortened, users.userid FROM users WHERE users.username=:username'
 // Route POST requests as appropriate
 app.post('/create-link', casService.block, jsonParser, function(request, response) {
     var generatedId = shortid.generate();
