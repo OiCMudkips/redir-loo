@@ -1,0 +1,19 @@
+<div id="top-header">
+<menu class="header-content" role="menubar" type="toolbar">
+    <li class="left">
+        <a href="/">Home</a>
+    </li>
+    {if user}
+    <li class="left">
+        <a href="/my-links">My Links</a>
+    </li>
+    <li class="right">
+        <a href="/logout">Logout</a>
+    </li>
+    {else}
+    <li class="right">
+        <a href="/login">Login</a>
+    </li>
+    {/if}
+</menu>
+</div>

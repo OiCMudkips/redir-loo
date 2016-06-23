@@ -1,0 +1,13 @@
+<div id="bottom-header">
+<menu class="header-content" type="toolbar">
+    <li class="right">
+        <a href="/author">About the Author</a>
+    </li>
+    <li class="right">
+        <a href="https://github.com/OiCMudkips/redir-loo">Source Code</a>
+    </li>
+    <li class="right">
+        <div>Facebook Link</div>
+    </li>
+</menu>
+</div>

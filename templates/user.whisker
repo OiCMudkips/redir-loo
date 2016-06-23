@@ -7,25 +7,7 @@
     <link href="styles.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-    <div id="top-header">
-    <menu class="header-content" role="menubar" type="toolbar">
-        <li class="left">
-            <a href="/">Home</a>
-        </li>
-        {if user}
-        <li class="left">
-            <a href="/my-links">My Links</a>
-        </li>
-        <li class="right">
-            <a href="/logout">Logout</a>
-        </li>
-        {else}
-        <li class="right">
-            <a href="/login">Login</a>
-        </li>
-        {/if}
-    </menu>
-    </div>
+    {>header}
     
     <div id="content">
     <h1>{user}'s Links</h1>
@@ -46,25 +28,14 @@
     <button class="open-popup">Add Link</button>
     {/if}
     
-    <div id="bottom-header">
-    <menu class="header-content" role="menubar" type="toolbar">
-        <li class="right">
-            <a href="/author">About the Author</a>
-        </li>
-        <li class="right">
-            <a href="https://github.com/OiCMudkips/redir-loo">Source Code</a>
-        </li>
-        <li class="right">
-            <div>Facebook Link</div>
-        </li>
-    </menu>
-    </div>
+    {>footer}
 
     <div id="add-link-overlay" style="display: none">
         <button id="close-overlay">X</button>
         <input id="url" type="url" autocomplete="url">
         <button id="add-link">Add</button>
     </div>
+    
     <script>
         var openPopup = function() {
             document.getElementById("add-link-overlay").style.display = "block";
