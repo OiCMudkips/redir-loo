@@ -38,3 +38,6 @@ jspm_packages
 
 # Config files
 config/config.json
+
+# VS Code files
+.vscode
