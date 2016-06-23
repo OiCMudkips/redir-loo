@@ -22,6 +22,7 @@
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "mariasql": "^0.2.6",
+    "shortid": "^2.2.6",
     "whiskers": "^0.3.3"
   }
 }

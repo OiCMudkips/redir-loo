@@ -5,6 +5,7 @@ var express = require('express');
 var session = require('express-session');
 var Client = require('mariasql');
 var whiskers = require('whiskers');
+var shortid = require('shortid');
 
 // App config
 var config = require('./config/config.json');
@@ -24,12 +25,13 @@ var preparedUserLookup = client.prepare('SELECT * FROM USERS WHERE USERNAME=:use
 var preparedUserInsert = client.prepare('INSERT INTO USERS (username) VALUES (:username)');
 var preparedUserDelete = client.prepare('DELETE FROM USERS WHERE USERNAME=:username LIMIT 1');
 var preparedLinkLookup = client.prepare('SELECT url, shortened FROM users a, links b WHERE a.username=:username AND a.userid=b.owner');
+var preparedLinkInsert = client.prepare('INSERT INTO links (url, shortened, owner) SELECT :link, :shortened, users.userid FROM users WHERE users.username=:username');
 
 // Expose static resources
 app.use(express.static('public'));
 
 // Configure body parser for POST requests
-app.use(bodyParser.json({ strict: true, type: 'application/json' }));
+var jsonParser = bodyParser.json({ strict: true, type: 'application/json' });
 
 // Route GET requests as appropriate
 app.get('/', function(request, response) {
@@ -78,13 +80,21 @@ app.get('/my-links', casService.bounce, function(request, response) {
 
 app.get('/logout', casService.logout);
 
+//'INSERT INTO links (url, shortened, owner) SELECT :link, :shortened, users.userid FROM users WHERE users.username=:username'
 // Route POST requests as appropriate
-app.post('/create-link', casService.block, function(request, response) {
-    var destinationUrl = request.body.destinationUrl;
-    console.log('Destination URL:' + destinationUrl);
-    // TODO: send back something to make a popup saying it worked
-    response.send('Thanks!');
-    response.end();
+app.post('/create-link', casService.block, jsonParser, function(request, response) {
+    var generatedId = shortid.generate();
+    client.query( preparedLinkInsert({ username: request.session[casService.session_name], link: request.body.url, shortened: generatedId }),
+        function(error, rows) {
+            if (error) {
+                console.log(error);
+            }
+            else {
+                response.send('Thanks! Shortened ID: ' + generatedId);
+                response.end();
+            }
+        }
+    );
 });
 
 // Start the server

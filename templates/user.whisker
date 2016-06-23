@@ -74,10 +74,30 @@
             document.getElementById("add-link-overlay").style.display = "none";
         };
 
+        var showLoading = function() {
+            // TODO: show a loading image or something
+        };
+
+        var hideLoading = function() {
+            // TODO: hdie a loading image or something
+        };
+
+        var postLink = function(url) {
+            showLoading();
+            var request = new XMLHttpRequest();
+            var url = document.getElementById("url").value;
+
+            request.open("POST", "/create-link", true);
+            request.setRequestHeader("Content-type", "application/json");
+            request.send(JSON.stringify({ url: url }));
+            hideLoading();
+        };
+
         var overlayOpeners = document.getElementsByClassName("open-popup");
         Array.prototype.forEach.call(overlayOpeners, function(current) {
             current.addEventListener("click", openPopup);
         });
         document.getElementById("close-overlay").addEventListener("click", closePopup);
+        document.getElementById("add-link").addEventListener("click", postLink);
     </script>
 </body>
