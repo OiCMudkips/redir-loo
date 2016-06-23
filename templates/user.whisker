@@ -5,6 +5,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&subset=latin,latin-ext" rel="stylesheet" type="text/css"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" rel="stylesheet" type="text/css"/>
     <link href="styles.css" rel="stylesheet" type="text/css"/>
+    {>head}
 </head>
 <body>
     {>header}
@@ -28,14 +29,14 @@
     <button class="open-popup">Add Link</button>
     {/if}
     
-    {>footer}
-
     <div id="add-link-overlay" style="display: none">
         <button id="close-overlay">X</button>
         <input id="url" type="url" autocomplete="url">
         <button id="add-link">Add</button>
     </div>
-    
+
+    {>footer}
+
     <script>
         var openPopup = function() {
             document.getElementById("add-link-overlay").style.display = "block";

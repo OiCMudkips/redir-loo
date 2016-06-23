@@ -37,10 +37,12 @@ var jsonParser = bodyParser.json({ strict: true, type: 'application/json' });
 app.get('/', function(request, response) {
     response.render('index.whisker', {
         partials: {
+            head: 'head.whisker',
             header: 'header.whisker',
             footer: 'footer.whisker'
         },
-        user: request.session[casService.session_name]
+        user: request.session[casService.session_name],
+        title: 'Home'
     });
 })
 
@@ -78,11 +80,13 @@ app.get('/my-links', casService.bounce, function(request, response) {
             else {
                 response.render('user.whisker', {
                     partials: {
+                        head: 'head.whisker',
                         header: 'header.whisker',
                         footer: 'footer.whisker'
                     },
                     user: request.session[casService.session_name],
-                    rows: rows
+                    rows: rows,
+                    title: 'My Links'
                 });
             }
         }
