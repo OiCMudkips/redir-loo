@@ -16,7 +16,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }));
-app.engine('.whisker', whiskers.__express);
+app.engine('.html', whiskers.__express);
 app.set('views', __dirname + '/templates');
 
 // DB config
