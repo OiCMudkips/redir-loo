@@ -35,11 +35,11 @@ var jsonParser = bodyParser.json({ strict: true, type: 'application/json' });
 
 // Route GET requests as appropriate
 app.get('/', function(request, response) {
-    response.render('index.whisker', {
+    response.render('index.html', {
         partials: {
-            head: 'head.whisker',
-            header: 'header.whisker',
-            footer: 'footer.whisker'
+            head: 'head.html',
+            header: 'header.html',
+            footer: 'footer.html'
         },
         user: request.session[casService.session_name],
         title: 'Home'
@@ -78,11 +78,11 @@ app.get('/my-links', casService.bounce, function(request, response) {
                 console.log(error);
             }
             else {
-                response.render('user.whisker', {
+                response.render('user.html', {
                     partials: {
-                        head: 'head.whisker',
-                        header: 'header.whisker',
-                        footer: 'footer.whisker'
+                        head: 'head.html',
+                        header: 'header.html',
+                        footer: 'footer.html'
                     },
                     user: request.session[casService.session_name],
                     rows: rows,
