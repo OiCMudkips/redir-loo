@@ -72,7 +72,8 @@ app.get('/login', casService.bounce, function(request, response) {
 });
 
 app.get('/my-links', casService.bounce, function(request, response) {
-    client.query( preparedLinkLookup({ username: request.session[casService.session_name] }),
+    client.query(
+        preparedLinkLookup({ username: request.session[casService.session_name] }),
         function(error, rows) {
             if (error) {
                 console.log(error);
@@ -98,7 +99,11 @@ app.get('/logout', casService.logout);
 // Route POST requests as appropriate
 app.post('/create-link', casService.block, jsonParser, function(request, response) {
     var generatedId = shortid.generate();
-    client.query( preparedLinkInsert({ username: request.session[casService.session_name], link: request.body.url, shortened: generatedId }),
+    client.query(
+        preparedLinkInsert({
+            username: request.session[casService.session_name],
+            link: request.body.url,
+            shortened: generatedId }),
         function(error, rows) {
             if (error) {
                 console.log(error);
