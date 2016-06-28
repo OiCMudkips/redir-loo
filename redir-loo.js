@@ -6,6 +6,7 @@ var session = require('express-session');
 var Client = require('mariasql');
 var whiskers = require('whiskers');
 var shortid = require('shortid');
+var validUrl = require('valid-url');
 
 // App config
 var config = require('./config/config.json');
@@ -26,6 +27,12 @@ var preparedUserInsert = client.prepare('INSERT INTO USERS (username) VALUES (:u
 var preparedUserDelete = client.prepare('DELETE FROM USERS WHERE USERNAME=:username LIMIT 1');
 var preparedLinkLookup = client.prepare('SELECT url, shortened FROM users a, links b WHERE a.username=:username AND a.userid=b.owner');
 var preparedLinkInsert = client.prepare('INSERT INTO links (url, shortened, owner) SELECT :link, :shortened, users.userid FROM users WHERE users.username=:username');
+
+// Create link constants
+ResponseCodes = {
+    SUCCESS: 0,
+    BAD_URL: 1
+};
 
 // Expose static resources
 app.use(express.static('public'));
@@ -98,6 +105,15 @@ app.get('/logout', casService.logout);
 
 // Route POST requests as appropriate
 app.post('/create-link', casService.block, jsonParser, function(request, response) {
+    var jsonResponse = {};
+
+    if (!validUrl.isWebUri(request.body.url)) {
+        jsonResponse.code = ResponseCodes.BAD_URL;
+        response.send(JSON.stringify(jsonResponse));
+        response.end();
+        return;
+    }
+
     var generatedId = shortid.generate();
     client.query(
         preparedLinkInsert({
@@ -109,7 +125,9 @@ app.post('/create-link', casService.block, jsonParser, function(request, respons
                 console.log(error);
             }
             else {
-                response.send('Thanks! Shortened ID: ' + generatedId);
+                jsonResponse.code = ResponseCodes.SUCCESS;
+                jsonResponse.shortened = generatedId;
+                response.send(jsonResponse.code);
                 response.end();
             }
         }
