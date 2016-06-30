@@ -67,18 +67,10 @@
                 shortenedLink.innerHTML = 'http://placeholder.com/' + response.shortened;
                 shortenedCell.appendChild(shortenedLink);
             }
-        };
-
-        var showLoading = function() {
-            // TODO: show a loading image or something
-        };
-
-        var hideLoading = function() {
-            // TODO: hide a loading image or something
+            closePopup();
         };
 
         var postLink = function(url) {
-            showLoading();
             var request = new XMLHttpRequest();
             var url = document.getElementById("url").value;
 
@@ -90,7 +82,6 @@
             }
             request.setRequestHeader("Content-type", "application/json");
             request.send(JSON.stringify({ url: url }));
-            hideLoading();
         };
 
         var overlayOpeners = document.getElementsByClassName("open-popup");
