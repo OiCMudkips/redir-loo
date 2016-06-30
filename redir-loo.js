@@ -127,7 +127,8 @@ app.post('/create-link', casService.block, jsonParser, function(request, respons
             else {
                 jsonResponse.code = ResponseCodes.SUCCESS;
                 jsonResponse.shortened = generatedId;
-                response.send(jsonResponse.code);
+                jsonResponse.url = request.body.url;
+                response.send(JSON.stringify(jsonResponse));
                 response.end();
             }
         }

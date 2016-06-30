@@ -9,7 +9,7 @@
     <h1>{user}'s Links</h1>
     {if rows.length}
     <button class="open-popup">Add Link</button>
-    <table>
+    <table id="links">
         <tr><th>Destination</th><th>Shortened Link</th></tr>
         {for row in rows}
         <tr>
@@ -41,6 +41,34 @@
             document.getElementById("add-link-overlay").style.display = "none";
         };
 
+        ResponseCodes = {
+            SUCCESS: 0,
+            BAD_URL: 1
+        };
+        var processPostedLink = function(responseText) {
+            var response = JSON.parse(responseText);
+            var table = document.getElementById("links");
+            var row = table.insertRow(-1);
+            var urlCell = row.insertCell(-1);
+            var shortenedCell = row.insertCell(-1);
+
+            if (typeof response.code === "undefined" || response.code === ResponseCodes.BAD_URL) {
+                urlCell.innerHTML = 'Error';
+                shortenedCell.innerHTML = 'Bad URL provided.';
+            }
+            else if (response.code === ResponseCodes.SUCCESS) {
+                var urlLink = document.createElement('a');
+                urlLink.href = response.url;
+                urlLink.innerHTML = response.url;
+                urlCell.appendChild(urlLink);
+
+                var shortenedLink = document.createElement('a');
+                shortenedLink.href = 'https://placeholder.com/' + response.shortened;
+                shortenedLink.innerHTML = 'https://placeholder.com/' + response.shortened;
+                shortenedCell.appendChild(shortenedLink);
+            }
+        };
+
         var showLoading = function() {
             // TODO: show a loading image or something
         };
@@ -55,6 +83,11 @@
             var url = document.getElementById("url").value;
 
             request.open("POST", "/create-link", true);
+            request.onreadystatechange = function() {
+                if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
+                    processPostedLink(request.responseText);
+                }
+            }
             request.setRequestHeader("Content-type", "application/json");
             request.send(JSON.stringify({ url: url }));
             hideLoading();
