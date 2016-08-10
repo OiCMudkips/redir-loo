@@ -31,7 +31,8 @@ var preparedLinkInsert = client.prepare('INSERT INTO links (url, shortened, owne
 // Create link constants
 ResponseCodes = {
     SUCCESS: 0,
-    BAD_URL: 1
+    BAD_URL: 1,
+    DATABASE_ERROR: 2
 };
 
 // Expose static resources
@@ -125,6 +126,9 @@ app.post('/create-link', casService.block, jsonParser, function(request, respons
         function(error, rows) {
             if (error) {
                 console.log(error);
+                jsonResponse.code = ResponseCodes.DATABASE_ERROR;
+                response.send(JSON.stringify(jsonResponse));
+                response.end();
             }
             else {
                 jsonResponse.code = ResponseCodes.SUCCESS;
