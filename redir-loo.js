@@ -103,6 +103,9 @@ app.get('/logout', casService.logout);
 
 // Route POST requests as appropriate
 app.post('/create-link', casService.block, jsonParser, function(request, response) {
+    // requirements for valid POST request:
+    // body.url is a well-formatted HTTP or HTTPS link
+
     var jsonResponse = {};
 
     if (!validUrl.isWebUri(request.body.url)) {
