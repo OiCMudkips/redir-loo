@@ -87,3 +87,19 @@ h2 {
 p {
     margin:5px 0px 50px 0px;
 }
+
+th {
+    font-size:18pt;
+}
+th, td {
+    padding:3pt;
+}
+table {
+    margin:auto;
+}
+table, th, td {
+    border: 1px solid black;
+}
+button {
+    margin: 10px;
+}
