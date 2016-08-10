@@ -1,5 +1,5 @@
 var openPopup = function() {
-  document.getElementById("add-link-overlay").style.display = "block";
+  document.getElementById("add-link-overlay").style.display = "flex";
 };
 
 var closePopup = function() {

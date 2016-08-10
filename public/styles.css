@@ -103,3 +103,23 @@ table, th, td {
 button {
     margin: 10px;
 }
+
+#add-link-overlay {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    background-color: rgba(0,0,0,0.75);
+    justify-content: center;
+    align-items: center;
+}
+
+#add-link-overlay-content {
+    background-color: white;
+    border-radius: 3px;
+}
+#add-link-overlay-content p {
+    margin: 5px;
+}
