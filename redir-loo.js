@@ -25,8 +25,9 @@ var client = new Client(config.sqlOptions);
 var preparedUserLookup = client.prepare('SELECT * FROM USERS WHERE USERNAME=:username');
 var preparedUserInsert = client.prepare('INSERT INTO USERS (username) VALUES (:username)');
 var preparedUserDelete = client.prepare('DELETE FROM USERS WHERE USERNAME=:username LIMIT 1');
-var preparedLinkLookup = client.prepare('SELECT url, shortened FROM users a, links b WHERE a.username=:username AND a.userid=b.owner');
-var preparedLinkInsert = client.prepare('INSERT INTO links (url, shortened, owner) SELECT :link, :shortened, users.userid FROM users WHERE users.username=:username');
+var preparedUserLinksLookup = client.prepare('SELECT url, shortened FROM users a, links b WHERE a.username=:username AND a.userid=b.owner');
+var preparedUserLinksInsert = client.prepare('INSERT INTO links (url, shortened, owner) SELECT :link, :shortened, users.userid FROM users WHERE users.username=:username');
+var preparedLinkLookup = client.prepare('SELECT url FROM links WHERE shortened=:shortened');
 
 // Create link constants
 ResponseCodes = {
@@ -79,7 +80,7 @@ app.get('/login', casService.bounce, function(request, response) {
 
 app.get('/my-links', casService.bounce, function(request, response) {
     client.query(
-        preparedLinkLookup({ username: request.session[casService.session_name] }),
+        preparedUserLinksLookup({ username: request.session[casService.session_name] }),
         function(error, rows) {
             if (error) {
                 console.log(error);
@@ -98,6 +99,31 @@ app.get('/my-links', casService.bounce, function(request, response) {
             }
         }
     );
+});
+
+app.get('/l/:id', casService.bounce, function(request, response) {
+    var shortenedId = request.params.id;
+    if (shortid.isValid(shortenedId)) {
+        client.query(
+            preparedLinkLookup({
+                shortened: shortenedId
+            }),
+            function(error, rows) {
+                if (error) {
+                    console.log(error);
+                }
+                else if (!rows.length) {
+                    response.status(404).send();
+                }
+                else {
+                    response.redirect(rows[0].url);
+                }
+            }
+        );
+    }
+    else {
+        response.status(404).send();
+    }
 });
 
 app.get('/logout', casService.logout);
@@ -119,7 +145,7 @@ app.post('/create-link', casService.block, jsonParser, function(request, respons
 
     var generatedId = shortid.generate();
     client.query(
-        preparedLinkInsert({
+        preparedUserLinksInsert({
             username: request.session[casService.session_name],
             link: request.body.url,
             shortened: generatedId }),

@@ -43,8 +43,8 @@ var processPostedLink = function(responseText) {
     urlCell.appendChild(urlLink);
 
     var shortenedLink = document.createElement('a');
-    shortenedLink.href = 'http://placeholder.com/' + response.shortened;
-    shortenedLink.innerHTML = 'http://placeholder.com/' + response.shortened;
+    shortenedLink.href = 'http://localhost/l/' + response.shortened;
+    shortenedLink.innerHTML = 'http://localhost/l/' + response.shortened;
     shortenedCell.appendChild(shortenedLink);
   }
 
