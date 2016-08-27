@@ -103,27 +103,27 @@ app.get('/my-links', casService.bounce, function(request, response) {
 
 app.get('/l/:id', casService.bounce, function(request, response) {
     var shortenedId = request.params.id;
-    if (shortid.isValid(shortenedId)) {
-        client.query(
-            preparedLinkLookup({
-                shortened: shortenedId
-            }),
-            function(error, rows) {
-                if (error) {
-                    console.log(error);
-                }
-                else if (!rows.length) {
-                    response.status(404).send();
-                }
-                else {
-                    response.redirect(rows[0].url);
-                }
-            }
-        );
-    }
-    else {
+    if (!shortid.isValid(shortenedId)) {
         response.status(404).send();
+        return;
     }
+
+    client.query(
+        preparedLinkLookup({
+            shortened: shortenedId
+        }),
+        function(error, rows) {
+            if (error) {
+                console.log(error);
+            }
+            else if (!rows.length) {
+                response.status(404).send();
+            }
+            else {
+                response.redirect(rows[0].url);
+            }
+        }
+    );
 });
 
 app.get('/logout', casService.logout);
