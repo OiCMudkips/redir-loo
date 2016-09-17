@@ -86,9 +86,22 @@ p {
 
 th {
     font-size:18pt;
+    background-color: grey;
 }
 th, td {
     padding:3pt;
+}
+th.default-sort {
+    cursor: pointer;
+}
+th.default-sort:after {
+    content: "   \2195";
+}
+th.sorted.ascending:after {
+    content: "   \2193";
+}
+th.sorted.descending:after {
+    content: "   \2191";
 }
 table {
     margin:auto;

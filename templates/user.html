@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <head>
     {>head}
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="jquery.tablesort.min.js"></script>
 </head>
 <body>
     {>header}
@@ -9,14 +11,16 @@
     <h1>{user}'s Links</h1>
     {if rows.length}
     <button class="open-popup">Add Link</button>
-    <table id="links">
-        <tr><th>Destination</th><th>Shortened Link</th></tr>
+    <table id="links" class="sortable">
+        <thead><tr><th class="default-sort">Destination</th><th class="no-sort">Shortened Link</th></tr></thead>
+        <tbody>
         {for row in rows}
         <tr>
             <td><a rel="nofollow" href="{row.url}">{row.url}</a></td>
             <td><a href="http://localhost/l/{row.shortened}">http://localhost/l/{row.shortened}</a></td>
         </tr>
         {/for}
+        </tbody>
     </table>
     <button class="open-popup">Add Link</button>
     {else}
@@ -44,5 +48,6 @@
         });
         document.getElementById("close-overlay").addEventListener("click", closePopup);
         document.getElementById("add-link").addEventListener("click", postLink);
+        $('table').tablesort();
     </script>
 </body>
