@@ -109,9 +109,7 @@ app.get('/l/:id', casService.bounce, function(request, response) {
     }
 
     client.query(
-        preparedLinkLookup({
-            shortened: shortenedId
-        }),
+        preparedLinkLookup({ shortened: shortenedId }),
         function(error, rows) {
             if (error) {
                 console.log(error);
